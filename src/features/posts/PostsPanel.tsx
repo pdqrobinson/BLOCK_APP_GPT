@@ -2,6 +2,8 @@ import type { Post } from '../../types'
 import { ConnectionTest } from '../feed/ConnectionTest'
 import { PostComposer } from './PostComposer'
 import mapboxgl from 'mapbox-gl'
+import { AddressClaimPanel } from './AddressClaimPanel'
+import { TrustPostComposer } from './TrustPostComposer'
 
 type PostsPanelProps = {
   posts: Post[]
@@ -14,6 +16,10 @@ type PostsPanelProps = {
   canPost: boolean
   isGuest: boolean
   onGuestPost: (post: Post) => void
+  addressId: string | null
+  claimLoading: boolean
+  claimError: string | null
+  onClaimed: () => void
 }
 
 export function PostsPanel({
@@ -26,7 +32,11 @@ export function PostsPanel({
   onCreated,
   canPost,
   isGuest,
-  onGuestPost
+  onGuestPost,
+  addressId,
+  claimLoading,
+  claimError,
+  onClaimed
 }: PostsPanelProps) {
   return (
     <aside className="posts-panel">
@@ -47,6 +57,15 @@ export function PostsPanel({
           onLocalCreate={onGuestPost}
         />
       ) : null}
+      {!isGuest && canPost ? (
+        addressId ? (
+          <TrustPostComposer map={map} addressId={addressId} onCreated={onCreated} />
+        ) : (
+          <AddressClaimPanel map={map} onClaimed={onClaimed} />
+        )
+      ) : null}
+      {claimLoading ? <div className="posts-panel__state">Checking claim…</div> : null}
+      {claimError ? <div className="posts-panel__state error">{claimError}</div> : null}
       {loading ? <div className="posts-panel__state">Loading feed…</div> : null}
       {error ? <div className="posts-panel__state error">{error}</div> : null}
       {!loading && !error && posts.length === 0 ? (

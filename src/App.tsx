@@ -10,6 +10,7 @@ import { useAuth } from './features/auth/useAuth'
 import { AuthPanel } from './features/auth/AuthPanel'
 import { usePresence } from './features/presence/usePresence'
 import { useFeed } from './features/feed/useFeed'
+import { useAddressClaim } from './features/posts/useAddressClaim'
 import type { Post, PostType } from './types'
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
     enabled: !!user && !guestMode,
     refreshToken
   })
+
+  const claim = useAddressClaim(!!user && !guestMode)
 
   const [localGuestPosts, setLocalGuestPosts] = useState<Post[]>([])
   const demoPosts = useMemo<Post[]>(
@@ -101,6 +104,10 @@ function App() {
         canPost={!!user && !guestMode}
         isGuest={guestMode}
         onGuestPost={(post) => setLocalGuestPosts((prev) => [post, ...prev])}
+        addressId={claim.addressId}
+        claimLoading={claim.loading}
+        claimError={claim.error}
+        onClaimed={claim.reload}
       />
     </div>
   )
