@@ -1,20 +1,10 @@
-:root {
-  --ink: #0f1c2e;
-  --muted: #5c677a;
-  --surface: #f5f2ec;
-  --panel: #ffffff;
-  --accent: #ff7846;
-  --accent-dark: #e45c2e;
-  --shadow: 0 18px 40px rgba(14, 24, 36, 0.16);
-}
-
 .app-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
   height: 100vh;
   width: 100vw;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--ng-bg);
+  color: var(--ng-text);
 }
 
 .map-shell {
@@ -38,7 +28,7 @@
   padding: 10px 14px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
   font-size: 0.9rem;
 }
 
@@ -53,7 +43,7 @@
 
 .map-overlay.notice.guest button {
   border: none;
-  background: #111827;
+  background: var(--ng-primary);
   color: white;
   border-radius: 999px;
   padding: 4px 10px;
@@ -65,7 +55,7 @@
   display: grid;
   place-items: center;
   font-size: 1.1rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
   background: rgba(245, 242, 236, 0.85);
 }
 
@@ -77,7 +67,7 @@
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 999px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
 }
 
 .category-filters button {
@@ -87,11 +77,11 @@
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .category-filters button.is-active {
-  background: var(--accent);
+  background: var(--ng-primary);
   color: white;
 }
 
@@ -108,19 +98,19 @@
 }
 
 .map-pin--status {
-  background: linear-gradient(135deg, #2a9d8f, #1f7a6f);
+  background: linear-gradient(135deg, #3a7f6b, #2f6b5a);
 }
 
 .map-pin--ask {
-  background: linear-gradient(135deg, #457b9d, #2f5f7f);
+  background: linear-gradient(135deg, #9aa2a9, #6b7280);
 }
 
 .map-pin--activity {
-  background: linear-gradient(135deg, #e76f51, #c95b3e);
+  background: linear-gradient(135deg, #2f6b5a, #245447);
 }
 
 .map-pin--item {
-  background: linear-gradient(135deg, #f4a261, #e07a35);
+  background: linear-gradient(135deg, #7c8b85, #56615c);
 }
 
 .map-pin.is-selected {
@@ -147,7 +137,7 @@
 }
 
 .posts-panel {
-  background: var(--panel);
+  background: var(--ng-surface);
   box-shadow: -20px 0 50px rgba(14, 24, 36, 0.12);
   display: flex;
   flex-direction: column;
@@ -168,14 +158,14 @@
 }
 
 .posts-panel__header span {
-  color: var(--muted);
+  color: var(--ng-text-muted);
   font-size: 0.85rem;
 }
 
 .posts-panel__guest {
   padding: 8px 24px 0;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .posts-panel__list {
@@ -188,7 +178,7 @@
 
 .posts-panel__item {
   border: 1px solid rgba(15, 28, 46, 0.08);
-  background: #fffaf4;
+  background: var(--ng-surface);
   padding: 14px 16px;
   border-radius: 14px;
   text-align: left;
@@ -197,17 +187,17 @@
 
 .posts-panel__item:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
 }
 
 .posts-panel__item.is-selected {
-  border-color: var(--accent);
-  box-shadow: 0 14px 30px rgba(255, 120, 70, 0.25);
+  border-color: var(--ng-primary);
+  box-shadow: 0 14px 30px rgba(58, 127, 107, 0.25);
 }
 
 .posts-panel__item p {
   margin: 8px 0 0;
-  color: var(--ink);
+  color: var(--ng-text);
 }
 
 .pill {
@@ -215,30 +205,30 @@
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   font-weight: 700;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .posts-panel__state {
   padding: 12px 24px;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .posts-panel__state.error {
-  color: #d33f49;
+  color: #b42318;
 }
 
 .post-composer {
   margin: 0 24px 16px;
   padding: 16px;
   border-radius: 16px;
-  background: #fff5eb;
+  background: var(--ng-primary-soft);
   border: 1px solid rgba(15, 28, 46, 0.08);
   display: grid;
   gap: 10px;
 }
 
 .post-composer.trust {
-  background: #eef6ff;
+  background: var(--ng-primary-soft);
 }
 
 .post-composer__header {
@@ -247,7 +237,7 @@
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .post-composer__types {
@@ -256,19 +246,19 @@
 }
 
 .post-composer__types button {
-  border: 1px solid rgba(15, 28, 46, 0.12);
+  border: 1px solid var(--ng-border);
   border-radius: 999px;
   padding: 4px 10px;
-  background: #fffaf4;
+  background: var(--ng-surface);
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .post-composer__types button.is-active {
-  background: var(--accent);
+  background: var(--ng-primary);
   color: white;
-  border-color: var(--accent);
+  border-color: var(--ng-primary);
 }
 
 .post-composer__item-kind {
@@ -278,23 +268,23 @@
 
 .post-composer__item-kind button {
   border-radius: 999px;
-  border: 1px solid rgba(15, 28, 46, 0.12);
+  border: 1px solid var(--ng-border);
   background: #ffffff;
   padding: 6px 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .post-composer__item-kind button.is-active {
-  background: #1f4b7a;
+  background: var(--ng-primary);
   color: white;
-  border-color: #1f4b7a;
+  border-color: var(--ng-primary);
 }
 
 .post-composer textarea {
   border-radius: 12px;
-  border: 1px solid rgba(15, 28, 46, 0.12);
+  border: 1px solid var(--ng-border);
   padding: 10px;
   resize: vertical;
   font-family: inherit;
@@ -305,12 +295,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: var(--muted);
+  color: var(--ng-text-muted);
   font-size: 0.75rem;
 }
 
 .post-composer__footer button {
-  background: var(--accent);
+  background: var(--ng-primary);
   border: none;
   color: white;
   padding: 6px 12px;
@@ -320,20 +310,20 @@
 }
 
 .post-composer__footer button:disabled {
-  background: #c9c2b8;
-  color: #786e63;
+  background: var(--ng-border);
+  color: var(--ng-text-muted);
 }
 
 .post-composer__status {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .claim-panel {
   margin: 0 24px 16px;
   padding: 14px 16px;
   border-radius: 14px;
-  background: #f3f7f1;
+  background: var(--ng-primary-soft);
   border: 1px solid rgba(15, 28, 46, 0.08);
   display: grid;
   gap: 10px;
@@ -346,14 +336,14 @@
 
 .claim-panel p {
   margin: 0;
-  color: var(--muted);
+  color: var(--ng-text-muted);
   font-size: 0.85rem;
 }
 
 .claim-panel button {
   border-radius: 999px;
   border: none;
-  background: #1f4b7a;
+  background: var(--ng-primary);
   color: white;
   padding: 8px 12px;
   font-weight: 600;
@@ -361,7 +351,7 @@
 
 .claim-panel__status {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .connection-test {
@@ -369,12 +359,12 @@
   align-items: center;
   gap: 12px;
   padding: 0 24px 14px;
-  color: var(--muted);
+  color: var(--ng-text-muted);
   font-size: 0.85rem;
 }
 
 .connection-test button {
-  background: #111827;
+  background: var(--ng-primary);
   color: white;
   border: none;
   padding: 6px 12px;
@@ -392,7 +382,7 @@
 }
 
 .connection-test--error span {
-  color: #d33f49;
+  color: #b42318;
 }
 
 .auth-panel {
@@ -403,7 +393,7 @@
   padding: 20px;
   width: 320px;
   border-radius: 18px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-card);
   z-index: 4;
 }
 
@@ -414,13 +404,13 @@
 
 .auth-panel__header p {
   margin: 0 0 16px;
-  color: var(--muted);
+  color: var(--ng-text-muted);
   font-size: 0.9rem;
 }
 
 .auth-panel__actions button {
   width: 100%;
-  background: var(--ink);
+  background: var(--ng-primary);
   color: white;
   border: none;
   padding: 10px 12px;
@@ -438,29 +428,29 @@
   display: grid;
   gap: 6px;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 .auth-panel__fields input {
   padding: 8px 10px;
   border-radius: 10px;
-  border: 1px solid rgba(15, 28, 46, 0.12);
+  border: 1px solid var(--ng-border);
   font-size: 0.95rem;
 }
 
 .auth-panel__fields button {
   border-radius: 10px;
-  border: 1px solid rgba(15, 28, 46, 0.12);
-  background: #fff3ea;
+  border: 1px solid var(--ng-border);
+  background: var(--ng-primary-soft);
   padding: 8px 10px;
   font-weight: 600;
-  color: var(--accent-dark);
+  color: var(--ng-primary-hover);
 }
 
 .auth-panel__status {
   margin-top: 12px;
   font-size: 0.85rem;
-  color: var(--muted);
+  color: var(--ng-text-muted);
 }
 
 @media (max-width: 960px) {
@@ -478,4 +468,181 @@
     right: 16px;
     width: auto;
   }
+}
+
+.map-top-left {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 4;
+}
+
+.settings-button {
+  background: var(--ng-surface);
+  border: 1px solid var(--ng-border);
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: var(--ng-text);
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
+}
+
+.settings-button:hover {
+  background: var(--ng-primary-soft);
+}
+
+.post-composer__pin {
+  display: flex;
+  gap: 8px;
+}
+
+.post-composer__pin button {
+  border-radius: 999px;
+  border: 1px solid var(--ng-border);
+  background: var(--ng-surface);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ng-text-muted);
+}
+
+.post-composer__duration label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--ng-text-muted);
+}
+
+.post-composer__duration input {
+  width: 100%;
+}
+
+.post-composer__duration span {
+  font-size: 0.75rem;
+  color: var(--ng-text);
+}
+
+.settings-panel {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 360px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--ng-surface);
+  border: 1px solid var(--ng-border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  padding: 16px;
+  z-index: 10;
+}
+
+.settings-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-panel section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ng-border);
+}
+
+.settings-panel__zip {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.settings-panel__zip input {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--ng-border);
+}
+
+.settings-panel__zip button {
+  border-radius: 10px;
+  border: none;
+  background: var(--ng-primary);
+  color: white;
+  padding: 8px 10px;
+  font-weight: 600;
+}
+
+.settings-panel__claims {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.settings-panel__claim {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--ng-primary-soft);
+}
+
+.settings-panel__actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.settings-panel__radius {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--ng-text-muted);
+}
+
+.settings-panel__state {
+  font-size: 0.8rem;
+  color: var(--ng-text-muted);
+}
+
+.settings-panel__state.error {
+  color: #b42318;
+}
+
+.posts-panel__tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 24px 12px;
+}
+
+.posts-panel__tabs button {
+  border-radius: 999px;
+  border: 1px solid var(--ng-border);
+  background: var(--ng-surface);
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ng-text-muted);
+}
+
+.posts-panel__tabs button.is-active {
+  background: var(--ng-primary);
+  color: white;
+  border-color: var(--ng-primary);
+}
+
+.posts-panel__state button {
+  margin-top: 8px;
+  border-radius: 999px;
+  border: none;
+  background: var(--ng-primary);
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.pill.muted {
+  color: var(--ng-text-muted);
+  margin-left: 8px;
 }

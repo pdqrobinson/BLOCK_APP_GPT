@@ -4,8 +4,8 @@
   font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
   line-height: 1.4;
   font-weight: 400;
-  color: #0f1c2e;
-  background-color: #f5f2ec;
+  color: var(--ng-text);
+  background-color: var(--ng-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

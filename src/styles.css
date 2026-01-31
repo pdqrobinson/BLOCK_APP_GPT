@@ -1,0 +1,11 @@
+:root {
+  --ng-bg: #f5f7f6;
+  --ng-surface: #ffffff;
+  --ng-primary: #3a7f6b;
+  --ng-primary-hover: #2f6b5a;
+  --ng-primary-soft: #e7f2ee;
+  --ng-text: #1f2933;
+  --ng-text-muted: #6b7280;
+  --ng-border: #e2e6e4;
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.04);
+}

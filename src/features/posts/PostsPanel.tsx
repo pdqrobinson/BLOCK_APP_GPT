@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import type { Post } from '../../types'
 import { ConnectionTest } from '../feed/ConnectionTest'
 import { PostComposer } from './PostComposer'
 import mapboxgl from 'mapbox-gl'
-import { AddressClaimPanel } from './AddressClaimPanel'
 import { TrustPostComposer } from './TrustPostComposer'
 
 type PostsPanelProps = {
@@ -16,10 +16,12 @@ type PostsPanelProps = {
   canPost: boolean
   isGuest: boolean
   onGuestPost: (post: Post) => void
-  addressId: string | null
+  hasClaim: boolean
+  claimCenter: { lng: number; lat: number } | null
+  claimRadiusMiles: number | null
   claimLoading: boolean
   claimError: string | null
-  onClaimed: () => void
+  onOpenSettings: () => void
 }
 
 export function PostsPanel({
@@ -33,11 +35,14 @@ export function PostsPanel({
   canPost,
   isGuest,
   onGuestPost,
-  addressId,
+  hasClaim,
+  claimCenter,
+  claimRadiusMiles,
   claimLoading,
   claimError,
-  onClaimed
+  onOpenSettings
 }: PostsPanelProps) {
+  const [composerMode, setComposerMode] = useState<'local' | 'trust'>('local')
   return (
     <aside className="posts-panel">
       <div className="posts-panel__header">
@@ -46,8 +51,33 @@ export function PostsPanel({
       </div>
       {isGuest ? <div className="posts-panel__guest">Guest mode</div> : null}
       <ConnectionTest />
+      {canPost && !isGuest && hasClaim ? (
+        <div className="posts-panel__tabs">
+          <button
+            className={composerMode === 'local' ? 'is-active' : ''}
+            onClick={() => setComposerMode('local')}
+          >
+            Status / Ask
+          </button>
+          <button
+            className={composerMode === 'trust' ? 'is-active' : ''}
+            onClick={() => setComposerMode('trust')}
+          >
+            Activity / Item
+          </button>
+        </div>
+      ) : null}
       {canPost ? (
-        <PostComposer map={map} onCreated={onCreated} mode="auth" />
+        (!hasClaim || composerMode === 'local') ? (
+          <PostComposer
+            map={map}
+            onCreated={onCreated}
+            mode="auth"
+            hasClaim={hasClaim}
+            claimCenter={claimCenter}
+            claimRadiusMiles={claimRadiusMiles}
+          />
+        ) : null
       ) : null}
       {isGuest ? (
         <PostComposer
@@ -55,13 +85,24 @@ export function PostsPanel({
           onCreated={onCreated}
           mode="guest"
           onLocalCreate={onGuestPost}
+          hasClaim={false}
         />
       ) : null}
       {!isGuest && canPost ? (
-        addressId ? (
-          <TrustPostComposer map={map} addressId={addressId} onCreated={onCreated} />
+        hasClaim ? (
+          composerMode === 'trust' ? (
+            <TrustPostComposer
+              map={map}
+              onCreated={onCreated}
+              claimCenter={claimCenter}
+              claimRadiusMiles={claimRadiusMiles}
+            />
+          ) : null
         ) : (
-          <AddressClaimPanel map={map} onClaimed={onClaimed} />
+          <div className="posts-panel__state">
+            You need a block claim to post Activity or Item.
+            <button onClick={onOpenSettings}>Claim a block</button>
+          </div>
         )
       ) : null}
       {claimLoading ? <div className="posts-panel__state">Checking claim…</div> : null}
@@ -80,6 +121,9 @@ export function PostsPanel({
           >
             <div className="posts-panel__meta">
               <span className="pill">{post.post_type}</span>
+              {post.expires_at ? (
+                <span className="pill muted">{formatTimeRemaining(post.expires_at)}</span>
+              ) : null}
             </div>
             <p>{post.content}</p>
           </button>
@@ -87,4 +131,15 @@ export function PostsPanel({
       </div>
     </aside>
   )
+}
+
+function formatTimeRemaining(expiresAt: string) {
+  const diff = new Date(expiresAt).getTime() - Date.now()
+  if (diff <= 0) return 'expired'
+  const minutes = Math.floor(diff / 60000)
+  if (minutes < 60) return `${minutes}m left`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h left`
+  const days = Math.floor(hours / 24)
+  return `${days}d left`
 }

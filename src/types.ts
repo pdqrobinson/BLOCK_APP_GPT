@@ -4,6 +4,8 @@ export type Post = {
   id: string
   post_type: PostType
   content: string
+  duration_minutes?: number | null
+  expires_at?: string | null
   created_at?: string
   geometry?: string | null
   address_id?: string | null
